@@ -3,6 +3,7 @@
 # =========================================================
 # Par défaut on exclut toutes les données sensibles...
 *.csv
+*.txt
 *.xlsx
 *.xls
 *.parquet
