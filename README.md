@@ -5,7 +5,6 @@
 > **Tuteur du projet** : Aymen Ben Brik
 > **Année** : 2026
 
-
 Bienvenue. Ce dossier contient l'ensemble des supports nécessaires pour réaliser le projet.
 
 ## Par où commencer
