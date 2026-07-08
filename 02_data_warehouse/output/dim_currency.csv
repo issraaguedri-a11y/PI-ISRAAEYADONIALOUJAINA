@@ -1,1 +1,20 @@
-currency_sk,currency,currency_label
+CURRENCY_SK,CURRENCY,CURRENCY_LABEL
+1,AED,Dirham Emirats Arabe Unis
+2,BHD,Dinar Bahraini
+3,CAD,Dollar Canadien
+4,CHF,Franc Suisse
+5,DKK,Couronne Danoise
+6,DZD,Dinar Algerien
+7,EUR,Euro
+8,GBP,Livre Sterling
+9,JPY,Yen Japonais
+10,KWD,Dinar Koweitien
+11,LYD,Dinar lybien
+12,MAD,Dirham Marocain
+13,NOK,Couronne Norvegienne
+14,QAR,Ryal Qatari
+15,SAR,Ryal Saoudien
+16,SEK,Couronne Suedoise
+17,TDC,Dinar convertible tunisien
+18,TND,Dinar Tunisien
+19,USD,Dollar des Etats-Unis

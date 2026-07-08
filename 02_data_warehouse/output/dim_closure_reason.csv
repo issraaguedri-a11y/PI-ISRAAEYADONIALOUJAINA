@@ -1,1 +1,20 @@
-closure_reason_sk,closure_reason,closure_reason_label
+CLOSURE_REASON_SK,CLOSURE_REASON,CLOSURE_REASON_LABEL
+1,BANK.REASON.1,Changement d adresse de domicile
+2,BANK.REASON.10,Ouverture d un nouveau compte aupres d une autre agence ATB
+3,BANK.REASON.100,Comptes gelés
+4,BANK.REASON.104,Changement d'adresse de domicile
+5,BANK.REASON.109,Refus de crédit
+6,BANK.REASON.11,Non-respect des engagements contractuels
+7,BANK.REASON.111,Réclamation non régularisée
+8,BANK.REASON.112,Cessation de travail
+9,BANK.REASON.12,Client décdé
+10,BANK.REASON.13,Autre
+11,BANK.REASON.2,Tarification chere
+12,BANK.REASON.3,Changement d employeur
+13,BANK.REASON.4,Non-respect des delais de traitement des operations
+14,BANK.REASON.5,Recherche service ou produit hors ATB/Convention autre banque
+15,BANK.REASON.6,Refus d octroi de credit
+16,BANK.REASON.7,Manque d $interactivite du personnel
+17,BANK.REASON.8,Non-traitement d une reclamation
+18,BANK.REASON.9,Cessation d activite
+19,UNKNOWN,Non renseigné

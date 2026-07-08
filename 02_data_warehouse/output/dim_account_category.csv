@@ -1,1 +1,150 @@
-account_category_sk,account_category,account_category_label
+ACCOUNT_CATEGORY_SK,ACCOUNT_CATEGORY,ACCOUNT_CATEGORY_LABEL
+1,1001,CPTE COURANT
+2,1002,CPTE SOUS DELAG.DE CHANGE
+3,1010,CPTE ALL.CARTE TECH.INTLE
+4,1011,CPTE INTERNE ALL.TOUR.CARTE
+5,1012,CPTE ALL.TOUR.DC
+6,1013,Non disponible
+7,1032,DEPOTS A VUE TUNISIEN PERS MORALE
+8,1033,CPTE PLACEMENT MAXI CASH
+9,1034,DEPOTS A VUE ETRANGER RESIDENT TND
+10,1035,DEPOTS A VUE DINARS CONV
+11,1036,DEPOTS A VUE DEVISES
+12,1037,DEPOTS A VUE TUNIS TTE TND CONV
+13,1038,CPTE PPR DEVISES
+14,1039,CPTE PPR DC
+15,1040,CPTE INR ECONOMIE /SALAIRE
+16,1041,CPTE SPECIAL EMPRUNT TND
+17,1051,CPTE PROF.DEV.P.P.
+18,1052,CPTE PROF.P.M.
+19,1055,CPTE SPECIAL DEV.PM TUN.RESIDENTE
+20,1056,CPTE SPECIAL DC PM TUN.RESIDENTE
+21,1060,CPTE TND NON RESIDENT LIBYEN
+22,1061,CPTE DEV NON RESIDENT LIBYEN
+23,1103,CPTE SPECIAL TND
+24,1104,CPTE COURANT PACK SANTE +
+25,1105,CPTE BUREAU DE CHANGE
+26,1106,CPTE STARTUP DEVISE 1184
+27,1107,CPTE PROF NEGOCE INTL
+28,1200,CPT INDISPO STE EN FORMATION
+29,1201,CPT INDISPO CLT DECEDE RESIDENT
+30,1202,CPT INDISPO CLT DECEDE DVS NONRESID
+31,1203,CPTE INDISPO AUGM CAPITAL
+32,1204,DIVERS CPT INDISPO
+33,1205,CPT INDISPO DVS
+34,1211,CPTE D'ATTENTE 1129
+35,2001,Non disponible
+36,2002,Non disponible
+37,2004,Non disponible
+38,3005,Non disponible
+39,3006,Non disponible
+40,3010,Non disponible
+41,3017,Non disponible
+42,3022,Non disponible
+43,3023,Non disponible
+44,3027,Non disponible
+45,3030,Non disponible
+46,3035,Non disponible
+47,3040,Non disponible
+48,3041,Non disponible
+49,3042,Non disponible
+50,3044,Non disponible
+51,3045,Non disponible
+52,3047,Non disponible
+53,3048,Non disponible
+54,3049,Non disponible
+55,3050,Non disponible
+56,3055,Non disponible
+57,3056,Non disponible
+58,3057,Non disponible
+59,3058,Non disponible
+60,3059,Non disponible
+61,3061,Non disponible
+62,3062,Non disponible
+63,3063,Non disponible
+64,3064,Non disponible
+65,3065,Non disponible
+66,3066,Non disponible
+67,3067,Non disponible
+68,3068,Non disponible
+69,3069,Non disponible
+70,3075,Non disponible
+71,3076,Non disponible
+72,3077,Non disponible
+73,3078,Non disponible
+74,3085,Non disponible
+75,3100,Non disponible
+76,3105,Non disponible
+77,3200,Non disponible
+78,3611,Non disponible
+79,3612,Non disponible
+80,3613,Non disponible
+81,3616,Non disponible
+82,3650,Non disponible
+83,3651,Non disponible
+84,3652,Non disponible
+85,3653,Non disponible
+86,5001,Non disponible
+87,5002,Non disponible
+88,5003,Non disponible
+89,5004,Non disponible
+90,5005,Non disponible
+91,5500,Non disponible
+92,6001,EPARGNE SUR LIVRETS
+93,6003,CPTE EPARGNE PACK SANTE +
+94,6005,PLAN EPARGNE ETUDE
+95,6010,EPARGNE INVESTISSEMENT
+96,6011,EPARGNE PROMOTION PROJETS
+97,6015,CPTE EPARGNE DEV.PP NON RESI.
+98,6016,CPTE EPARGNE DC.PP NON RESI.
+99,6017,CPTE EPARGNE DC TTE
+100,8005,Non disponible
+101,8014,Non disponible
+102,8018,Non disponible
+103,8019,Non disponible
+104,8020,Non disponible
+105,8021,Non disponible
+106,8026,Non disponible
+107,8027,Non disponible
+108,8030,Non disponible
+109,8031,Non disponible
+110,8035,Non disponible
+111,8036,Non disponible
+112,8037,Non disponible
+113,8038,Non disponible
+114,8039,Non disponible
+115,8052,Non disponible
+116,8053,Non disponible
+117,8054,Non disponible
+118,8055,Non disponible
+119,8056,Non disponible
+120,8057,Non disponible
+121,8058,Non disponible
+122,8059,Non disponible
+123,8060,Non disponible
+124,8061,Non disponible
+125,8062,Non disponible
+126,8065,Non disponible
+127,8110,Non disponible
+128,8122,Non disponible
+129,8500,Non disponible
+130,8510,Non disponible
+131,8511,Non disponible
+132,8513,Non disponible
+133,8540,Non disponible
+134,8548,Non disponible
+135,8549,Non disponible
+136,8550,Non disponible
+137,8900,Non disponible
+138,8902,Non disponible
+139,8903,Non disponible
+140,8905,Non disponible
+141,8906,Non disponible
+142,8907,Non disponible
+143,8908,Non disponible
+144,8910,Non disponible
+145,8911,Non disponible
+146,8915,Non disponible
+147,8920,Non disponible
+148,8930,Non disponible
+149,9005,Non disponible

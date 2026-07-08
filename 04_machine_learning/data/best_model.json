@@ -6,7 +6,7 @@
     "f1": 0.9425,
     "roc_auc": 0.9806,
     "pr_auc": 0.9829,
-    "temps_entrainement_s": 9.3,
+    "temps_entrainement_s": 12.9,
     "n_entrainement": 290855,
     "n_evaluation": 72714
   }

@@ -5,7 +5,7 @@
     "f1": 0.9044,
     "roc_auc": 0.9447,
     "pr_auc": 0.9492,
-    "temps_entrainement_s": 6.4,
+    "temps_entrainement_s": 7.0,
     "n_entrainement": 290855,
     "n_evaluation": 72714
   },
@@ -25,7 +25,7 @@
     "f1": 0.9379,
     "roc_auc": 0.9743,
     "pr_auc": 0.9767,
-    "temps_entrainement_s": 6.3,
+    "temps_entrainement_s": 6.1,
     "n_entrainement": 290855,
     "n_evaluation": 72714
   },
@@ -35,7 +35,7 @@
     "f1": 0.9384,
     "roc_auc": 0.9771,
     "pr_auc": 0.9806,
-    "temps_entrainement_s": 39.2,
+    "temps_entrainement_s": 40.9,
     "n_entrainement": 290855,
     "n_evaluation": 72714
   },
@@ -45,7 +45,7 @@
     "f1": 0.9237,
     "roc_auc": 0.9552,
     "pr_auc": 0.9484,
-    "temps_entrainement_s": 35.8,
+    "temps_entrainement_s": 31.3,
     "n_entrainement": 8000,
     "n_evaluation": 72714
   },
@@ -55,7 +55,7 @@
     "f1": 0.9425,
     "roc_auc": 0.9806,
     "pr_auc": 0.9829,
-    "temps_entrainement_s": 9.3,
+    "temps_entrainement_s": 12.9,
     "n_entrainement": 290855,
     "n_evaluation": 72714
   }
