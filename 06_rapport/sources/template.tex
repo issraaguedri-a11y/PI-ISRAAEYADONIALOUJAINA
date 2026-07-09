@@ -6,6 +6,10 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \graphicspath{{figures/}}
+% Toute image dépassant la largeur du texte est automatiquement réduite
+% (les ratios très larges, ex. diagrammes Graphviz horizontaux, ne débordent
+% donc jamais de la page), en conservant les proportions.
+\setkeys{Gin}{width=\linewidth,height=0.85\textheight,keepaspectratio}
 
 % ================ Encodage et langue ================
 \usepackage{fontspec}
@@ -29,6 +33,7 @@
 \definecolor{rulec}{HTML}{D0D7DE}
 
 \usepackage[colorlinks=true, linkcolor=primary, urlcolor=primary, citecolor=primary]{hyperref}
+\usepackage{xurl}
 
 % ================ Tableaux ================
 \usepackage{longtable, booktabs, array, tabularx}
@@ -67,8 +72,8 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{gray}ESPRIT School of Business --- M1 BA --- Projet Intégré}
-\fancyhead[R]{\small\color{gray}\nouppercase{\leftmark}}
+\fancyhead[L]{\small\color{gray}ESPRIT School of Business --- M1 BA}
+\fancyhead[R]{\small\color{gray}Projet Intégré --- Churn Client}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.3pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -93,10 +98,12 @@ $endif$
 
 \begin{titlepage}
 \centering
-\vspace*{1.5cm}
+\vspace*{1cm}
+
+\includegraphics[width=0.35\linewidth]{logo_esprit.png}\\[0.8cm]
 
 {\Large\bfseries ESPRIT School of Business}\\[0.3cm]
-{\large Master 1 --- Business Analytics (M1 BA)}\\[2cm]
+{\large Master 1 --- Business Analytics (M1 BA)}\\[1.5cm]
 
 {\color{gray}\large Projet Intégré}\\[0.3cm]
 {\color{gray}\large Analyse et Prédiction du Churn Client}\\[2.2cm]

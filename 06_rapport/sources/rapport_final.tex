@@ -6,6 +6,10 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \graphicspath{{figures/}}
+% Toute image dépassant la largeur du texte est automatiquement réduite
+% (les ratios très larges, ex. diagrammes Graphviz horizontaux, ne débordent
+% donc jamais de la page), en conservant les proportions.
+\setkeys{Gin}{width=\linewidth,height=0.85\textheight,keepaspectratio}
 
 % ================ Encodage et langue ================
 \usepackage{fontspec}
@@ -29,6 +33,7 @@
 \definecolor{rulec}{HTML}{D0D7DE}
 
 \usepackage[colorlinks=true, linkcolor=primary, urlcolor=primary, citecolor=primary]{hyperref}
+\usepackage{xurl}
 
 % ================ Tableaux ================
 \usepackage{longtable, booktabs, array, tabularx}
@@ -67,8 +72,8 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{gray}ESPRIT School of Business --- M1 BA --- Projet Intégré}
-\fancyhead[R]{\small\color{gray}\nouppercase{\leftmark}}
+\fancyhead[L]{\small\color{gray}ESPRIT School of Business --- M1 BA}
+\fancyhead[R]{\small\color{gray}Projet Intégré --- Churn Client}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.3pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -82,7 +87,7 @@
 
 
 % ================ Métadonnées ================
-\title{\color{primary}\textbf{Analyse et Pr��diction du Churn Client}}
+\title{\color{primary}\textbf{Analyse et Prédiction du Churn Client}}
 \author{Israa Guedri, Eya Smeti, Donia Belamin, Loujaina Guesmi}
 \date{Juillet 2026}
 
@@ -90,20 +95,24 @@
 
 \begin{titlepage}
 \centering
-\vspace*{1.5cm}
+\vspace*{1cm}
+
+\includegraphics[width=0.35\linewidth]{logo_esprit.png}\\[0.8cm]
 
 {\Large\bfseries ESPRIT School of Business}\\[0.3cm]
-{\large Master 1 --- Business Analytics (M1 BA)}\\[2cm]
+{\large Master 1 --- Business Analytics (M1 BA)}\\[1.5cm]
 
 {\color{gray}\large Projet Intégré}\\[0.3cm]
 {\color{gray}\large Analyse et Prédiction du Churn Client}\\[2.2cm]
 
 \rule{0.85\linewidth}{1.2pt}\\[0.6cm]
-{\Huge\bfseries\color{primary} Analyse et Pr��diction du Churn Client\par}
+{\Huge\bfseries\color{primary} Analyse et Prédiction du Churn
+Client\par}
 \rule{0.85\linewidth}{1.2pt}\\[2cm]
 
 {\large Équipe projet}\\[0.3cm]
-{\Large\bfseries Israa Guedri, Eya Smeti, Donia Belamin, Loujaina Guesmi}\\[1.5cm]
+{\Large\bfseries Israa Guedri, Eya Smeti, Donia Belamin, Loujaina
+Guesmi}\\[1.5cm]
 
 {\large Tuteur du projet}\\[0.2cm]
 {\Large\bfseries Aymen Ben Brik}\\[1cm]
@@ -205,8 +214,8 @@ Le projet a été mené sur 4 semaines, avec une progression suivant la
 chaîne de valeur analytique classique : exploration des données, ETL,
 modélisation dimensionnelle, Business Intelligence, Machine Learning,
 puis interface de restitution. Cette organisation correspond à la
-structure numérotée du dépôt de code (\texttt{01\_etl} à
-\texttt{07\_presentation}).
+structure numérotée du dépôt de code (\texttt{01\_\hspace{0pt}etl} à
+\texttt{07\_\hspace{0pt}presentation}).
 
 Le travail a été mené en équipe de 4, avec une répartition des rôles
 centrée sur les compétences de chacune : ingénierie des données et
@@ -264,9 +273,15 @@ Chaque ligne du fichier principal correspond à un couple
 \textbf{(client, compte-produit)} : un même client peut apparaître
 plusieurs fois s'il détient plusieurs comptes ou produits.
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6010}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3390}}@{}}
 \toprule\noalign{}
-Indicateur & Valeur \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Indicateur
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Valeur
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
@@ -283,8 +298,9 @@ Colonnes du fichier final (après enrichissement) & 36 \\
 
 Le fichier principal regroupe quatre familles de variables :
 
-\textbf{Identifiants} --- \texttt{CUSTOMER\_NO}, \texttt{ACCOUNT\_NO},
-\texttt{BRANCH} (agence de rattachement).
+\textbf{Identifiants} --- \texttt{CUSTOMER\_\hspace{0pt}NO},
+\texttt{ACCOUNT\_\hspace{0pt}NO}, \texttt{BRANCH} (agence de
+rattachement).
 
 \textbf{Informations client} --- nationalité, résidence, statut marital,
 année de naissance, nature du client (personne physique / morale),
@@ -293,9 +309,9 @@ Corporate\ldots), ligne métier, score KYC (\emph{Know Your Customer}),
 complétude du dossier, secteur d'activité, salaire déclaré.
 
 \textbf{Informations compte} --- statut du compte
-(\texttt{ACCOUNT\_STATUS}, \emph{Active}/\emph{Closed} --- base de la
-variable cible), dates d'ouverture et de clôture, catégorie de compte,
-devise, motif de clôture, solde.
+(\texttt{ACCOUNT\_\hspace{0pt}STATUS}, \emph{Active}/\emph{Closed} ---
+base de la variable cible), dates d'ouverture et de clôture, catégorie
+de compte, devise, motif de clôture, solde.
 
 \textbf{Informations produit} --- groupe de produits, ligne de produits,
 produit spécifique.
@@ -315,11 +331,12 @@ prédictive (niveau client) :
   au statut \emph{Closed}, 0 sinon. Utilisé pour les analyses de
   répartition par produit, secteur, devise.
 \item
-  \textbf{\texttt{CLIENT\_FULL\_CHURN}} (niveau client) : 1 si
-  \textbf{tous} les comptes du client sont clôturés
-  (\texttt{NB\_COMPTES\_CLOS\ =\ NB\_COMPTES}), 0 sinon. C'est un signal
-  plus fort qu'un churn partiel d'un client multi-comptes, et c'est la
-  variable retenue comme cible du modèle prédictif (section 6).
+  \textbf{\texttt{CLIENT\_\hspace{0pt}FULL\_\hspace{0pt}CHURN}} (niveau
+  client) : 1 si \textbf{tous} les comptes du client sont clôturés
+  (\texttt{NB\_\hspace{0pt}COMPTES\_\hspace{0pt}CLOS\ =\ NB\_\hspace{0pt}COMPTES}),
+  0 sinon. C'est un signal plus fort qu'un churn partiel d'un client
+  multi-comptes, et c'est la variable retenue comme cible du modèle
+  prédictif (section 6).
 \end{itemize}
 
 Sur le jeu de données final : \textbf{37,4 \%} des lignes compte-produit
@@ -343,12 +360,12 @@ traités explicitement dans le pipeline ETL (détaillé section 4) :
   \textbf{Dates aberrantes} : certaines dates d'ouverture de compte
   antérieures à 1900 (vraisemblablement des valeurs de remplissage
   technique plutôt que de vraies dates), filtrées via un seuil
-  \texttt{MIN\_DATE\ =\ 1900-01-01}.
+  \texttt{MIN\_\hspace{0pt}DATE\ =\ 1900-01-01}.
 \item
   \textbf{Incohérences de clôture} : des comptes marqués comme clôturés
   sans motif de clôture renseigné, ou l'inverse --- un indicateur
-  \texttt{FLAG\_INCOHERENCE\_CLOTURE} a été créé pour tracer ce
-  phénomène sans le masquer.
+  \texttt{FLAG\_\hspace{0pt}INCOHERENCE\_\hspace{0pt}CLOTURE} a été créé
+  pour tracer ce phénomène sans le masquer.
 \item
   \textbf{Valeurs catégorielles manquantes non uniformisées} : certains
   champs texte utilisaient des valeurs de remplissage variées (chaînes
@@ -356,15 +373,18 @@ traités explicitement dans le pipeline ETL (détaillé section 4) :
   la colonne, uniformisées lors de la transformation.
 \item
   \textbf{Une part significative de comptes sans catégorie de compte
-  renseignée} (\texttt{ACCOUNT\_CATEGORY\_LABEL\ =\ "Non\ disponible"},
+  renseignée}
+  (\texttt{ACCOUNT\_\hspace{0pt}CATEGORY\_\hspace{0pt}LABEL\ =\ "Non\ disponible"},
   \textasciitilde55 \% des lignes) --- un constat rapporté tel quel
   plutôt que masqué, avec ses implications discutées section 8
   (limites).
 \end{itemize}
 
 Ces choix de traitement sont documentés en détail dans le code source du
-module de transformation (\texttt{01\_etl/src/transform.py}) et dans le
-dictionnaire de données du dépôt. \# 3. Architecture de la solution
+module de transformation
+(\texttt{01\_\hspace{0pt}etl/\hspace{0pt}src/\hspace{0pt}transform.py})
+et dans le dictionnaire de données du dépôt. \# 3. Architecture de la
+solution
 
 \hypertarget{vue-densemble}{%
 \subsection{3.1 Vue d'ensemble}\label{vue-densemble}}
@@ -387,21 +407,22 @@ Un choix structurant du projet a été de faire de \textbf{PostgreSQL la
 source de vérité unique} pour l'ensemble des composantes en aval (Power
 BI, Machine Learning, application web) plutôt que de dupliquer des
 exports CSV intermédiaires. Concrètement,
-\texttt{04\_machine\_learning/src/prepare\_data.py} construit le jeu de
-données d'entraînement par une requête SQL d'agrégation directe sur
-l'entrepôt (pas de fichier CSV intermédiaire caché), et
-\texttt{05\_web\_app} interroge ce même entrepôt en temps réel à chaque
-affichage de page. Ce choix garantit qu'il n'existe qu'une seule
-définition du churn et qu'un seul jeu de features dans tout le projet.
+\texttt{04\_\hspace{0pt}machine\_\hspace{0pt}learning/\hspace{0pt}src/\hspace{0pt}prepare\_\hspace{0pt}data.py}
+construit le jeu de données d'entraînement par une requête SQL
+d'agrégation directe sur l'entrepôt (pas de fichier CSV intermédiaire
+caché), et \texttt{05\_\hspace{0pt}web\_\hspace{0pt}app} interroge ce
+même entrepôt en temps réel à chaque affichage de page. Ce choix
+garantit qu'il n'existe qu'une seule définition du churn et qu'un seul
+jeu de features dans tout le projet.
 
 \hypertarget{justification-des-choix-techniques}{%
 \subsection{3.2 Justification des choix
 techniques}\label{justification-des-choix-techniques}}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3133}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3133}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3133}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Composante
@@ -448,7 +469,7 @@ bout}\label{flux-de-donnuxe9es-de-bout-en-bout}}
   de qualité).
 \item
   \textbf{Chargement} : écriture dans les 7 tables du schéma en étoile
-  de l'entrepôt PostgreSQL \texttt{churn\_dw}.
+  de l'entrepôt PostgreSQL \texttt{churn\_\hspace{0pt}dw}.
 \item
   \textbf{Consommation BI} : Power BI se connecte directement à
   l'entrepôt et calcule ses mesures en DAX.
@@ -475,9 +496,10 @@ dimensionnelle}\label{etl-et-moduxe9lisation-dimensionnelle}}
 Le pipeline ETL est implémenté en Python (pandas), organisé en trois
 modules distincts correspondant aux trois étapes classiques
 Extract-Transform-Load, orchestrés par un script principal
-(\texttt{01\_etl/pipeline.py}) qui peut s'exécuter sur l'intégralité des
-données ou sur un échantillon (paramètre \texttt{-\/-sample}, utile pour
-les tests rapides en développement).
+(\texttt{01\_\hspace{0pt}etl/\hspace{0pt}pipeline.py}) qui peut
+s'exécuter sur l'intégralité des données ou sur un échantillon
+(paramètre \texttt{-\/-sample}, utile pour les tests rapides en
+développement).
 
 \hypertarget{extraction-extract.py}{%
 \subsubsection{\texorpdfstring{4.1.1 Extraction
@@ -504,9 +526,9 @@ l'ordre :
 \item
   \textbf{Normalisation des dates} : conversion des dates au format
   \texttt{YYYYMMDD} en type \texttt{datetime}, avec filtrage des dates
-  aberrantes antérieures au 1er janvier 1900 (\texttt{MIN\_DATE}),
-  traitées comme des valeurs de remplissage technique plutôt que des
-  dates réelles.
+  aberrantes antérieures au 1er janvier 1900
+  (\texttt{MIN\_\hspace{0pt}DATE}), traitées comme des valeurs de
+  remplissage technique plutôt que des dates réelles.
 \item
   \textbf{Jointures avec les dimensions} : enrichissement du fichier
   principal avec les libellés descriptifs (secteur d'activité, devise,
@@ -520,21 +542,26 @@ l'ordre :
   \item
     \texttt{AGE} à partir de l'année de naissance.
   \item
-    \texttt{CLIENT\_SENIORITY\_YEARS} et
-    \texttt{ACCOUNT\_SENIORITY\_YEARS} (ancienneté en années, calculée
-    par rapport à une date de référence).
+    \texttt{CLIENT\_\hspace{0pt}SENIORITY\_\hspace{0pt}YEARS} et
+    \texttt{ACCOUNT\_\hspace{0pt}SENIORITY\_\hspace{0pt}YEARS}
+    (ancienneté en années, calculée par rapport à une date de
+    référence).
   \item
-    \texttt{DAYS\_SINCE\_LAST\_REVIEW} (fraîcheur du dossier KYC).
+    \texttt{DAYS\_\hspace{0pt}SINCE\_\hspace{0pt}LAST\_\hspace{0pt}REVIEW}
+    (fraîcheur du dossier KYC).
   \item
-    \texttt{NB\_COMPTES}, \texttt{NB\_PRODUITS\_DISTINCTS},
-    \texttt{NB\_COMPTES\_CLOS} (agrégats de multi-bancarisation par
-    client).
+    \texttt{NB\_\hspace{0pt}COMPTES},
+    \texttt{NB\_\hspace{0pt}PRODUITS\_\hspace{0pt}DISTINCTS},
+    \texttt{NB\_\hspace{0pt}COMPTES\_\hspace{0pt}CLOS} (agrégats de
+    multi-bancarisation par client).
   \item
-    \texttt{CHURN} et \texttt{CLIENT\_FULL\_CHURN} (variables cibles,
-    voir section 2.3).
+    \texttt{CHURN} et
+    \texttt{CLIENT\_\hspace{0pt}FULL\_\hspace{0pt}CHURN} (variables
+    cibles, voir section 2.3).
   \item
-    \texttt{FLAG\_INCOHERENCE\_CLOTURE} (indicateur de qualité de
-    données, sans masquer l'anomalie détectée).
+    \texttt{FLAG\_\hspace{0pt}INCOHERENCE\_\hspace{0pt}CLOTURE}
+    (indicateur de qualité de données, sans masquer l'anomalie
+    détectée).
   \end{itemize}
 \item
   \textbf{Contrôle de cohérence final} : vérification du nombre de
@@ -559,8 +586,8 @@ approche par insertions unitaires.
 \subsection{4.2 Modèle dimensionnel}\label{moduxe8le-dimensionnel}}
 
 Le schéma retenu est un schéma en étoile classique : une table de faits
-centrale, \texttt{fact\_compte\_client}, entourée de six tables de
-dimensions.
+centrale, \texttt{fact\_\hspace{0pt}compte\_\hspace{0pt}client},
+entourée de six tables de dimensions.
 
 \begin{figure}
 \centering
@@ -575,9 +602,9 @@ l'agrégation au niveau client (Machine Learning) sans perte
 d'information.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3542}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3258}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2599}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Table
@@ -590,24 +617,27 @@ Volumétrie
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\texttt{fact\_compte\_client} & Table de faits --- 1 ligne = 1
-compte-produit & 490 243 lignes \\
-\texttt{dim\_client} & Attributs socio-démographiques du client & 363
-569 lignes \\
-\texttt{dim\_industry} & Secteur d'activité du client & 644 lignes \\
-\texttt{dim\_currency} & Devise du compte & 19 lignes \\
-\texttt{dim\_closure\_reason} & Motif de clôture du compte & 19
+\texttt{fact\_\hspace{0pt}compte\_\hspace{0pt}client} & Table de faits
+--- 1 ligne = 1 compte-produit & 490 243 lignes \\
+\texttt{dim\_\hspace{0pt}client} & Attributs socio-démographiques du
+client & 363 569 lignes \\
+\texttt{dim\_\hspace{0pt}industry} & Secteur d'activité du client & 644
 lignes \\
-\texttt{dim\_account\_category} & Catégorie du compte & 149 lignes \\
-\texttt{dim\_date} & Dimension calendaire (dates d'ouverture, de
-clôture) & 13 070 lignes \\
+\texttt{dim\_\hspace{0pt}currency} & Devise du compte & 19 lignes \\
+\texttt{dim\_\hspace{0pt}closure\_\hspace{0pt}reason} & Motif de clôture
+du compte & 19 lignes \\
+\texttt{dim\_\hspace{0pt}account\_\hspace{0pt}category} & Catégorie du
+compte & 149 lignes \\
+\texttt{dim\_\hspace{0pt}date} & Dimension calendaire (dates
+d'ouverture, de clôture) & 13 070 lignes \\
 \end{longtable}
 
 Les scripts SQL de création du schéma
-(\texttt{02\_data\_warehouse/schema/create\_tables.sql}) définissent les
-clés primaires, contraintes de clé étrangère, et index sur les colonnes
-de jointure les plus fréquemment utilisées (clés de substitution,
-\texttt{CUSTOMER\_NO}, \texttt{ACCOUNT\_NO}, indicateur \texttt{CHURN}).
+(\texttt{02\_\hspace{0pt}data\_\hspace{0pt}warehouse/\hspace{0pt}schema/\hspace{0pt}create\_\hspace{0pt}tables.sql})
+définissent les clés primaires, contraintes de clé étrangère, et index
+sur les colonnes de jointure les plus fréquemment utilisées (clés de
+substitution, \texttt{CUSTOMER\_\hspace{0pt}NO},
+\texttt{ACCOUNT\_\hspace{0pt}NO}, indicateur \texttt{CHURN}).
 
 \hypertarget{contruxf4les-de-cohuxe9rence-et-de-qualituxe9}{%
 \subsection{4.3 Contrôles de cohérence et de
@@ -625,11 +655,12 @@ les masquer :
   pipeline et journalisé, pour détecter toute dérive anormale entre deux
   exécutions.
 \item
-  L'indicateur \texttt{FLAG\_INCOHERENCE\_CLOTURE} trace les comptes
-  présentant une incohérence entre statut et motif de clôture, sans les
-  exclure du jeu de données --- un choix délibéré pour ne pas biaiser la
-  volumétrie, la correction de fond de ces incohérences relevant du
-  système source et non du pipeline analytique.
+  L'indicateur
+  \texttt{FLAG\_\hspace{0pt}INCOHERENCE\_\hspace{0pt}CLOTURE} trace les
+  comptes présentant une incohérence entre statut et motif de clôture,
+  sans les exclure du jeu de données --- un choix délibéré pour ne pas
+  biaiser la volumétrie, la correction de fond de ces incohérences
+  relevant du système source et non du pipeline analytique.
 \item
   La proportion de comptes sans catégorie renseignée
   (\texttt{Non\ disponible}, \textasciitilde55 \% des lignes) est
@@ -640,20 +671,22 @@ les masquer :
 \hypertarget{duxe9marche}{%
 \subsection{5.1 Démarche}\label{duxe9marche}}
 
-Le rapport Power BI se connecte à l'entrepôt \texttt{churn\_dw} (dans sa
-version la plus récente, via un export CSV des 7 tables de l'entrepôt
-afin de simplifier la configuration du poste de travail, sans changer ni
-le contenu ni la définition des indicateurs par rapport à une connexion
-PostgreSQL directe --- voir \texttt{03\_power\_bi/README.md}). Les
-relations entre la table de faits et les dimensions ont été
+Le rapport Power BI se connecte à l'entrepôt
+\texttt{churn\_\hspace{0pt}dw} (dans sa version la plus récente, via un
+export CSV des 7 tables de l'entrepôt afin de simplifier la
+configuration du poste de travail, sans changer ni le contenu ni la
+définition des indicateurs par rapport à une connexion PostgreSQL
+directe --- voir
+\texttt{03\_\hspace{0pt}power\_\hspace{0pt}bi/\hspace{0pt}README.md}).
+Les relations entre la table de faits et les dimensions ont été
 reconstruites dans Power BI selon le même schéma en étoile que celui de
 l'entrepôt (section 4.2).
 
 L'ensemble des mesures DAX utilisées est documenté dans
-\texttt{03\_power\_bi/measures\_dax.md}, avec pour chacune une
-explication de sa logique métier plutôt qu'une simple formule brute ---
-un choix qui facilite la relecture et la maintenance du rapport par un
-tiers.
+\texttt{03\_\hspace{0pt}power\_\hspace{0pt}bi/\hspace{0pt}measures\_\hspace{0pt}dax.md},
+avec pour chacune une explication de sa logique métier plutôt qu'une
+simple formule brute --- un choix qui facilite la relecture et la
+maintenance du rapport par un tiers.
 
 \hypertarget{kpis-retenus}{%
 \subsection{5.2 KPIs retenus}\label{kpis-retenus}}
@@ -707,30 +740,40 @@ restent à finaliser dans une page dédiée à la segmentation client
 (profils, valeur client, comptes à risque) --- la structure de cette
 page ainsi que les mesures DAX nécessaires sont d'ores et déjà
 documentées et prêtes à l'implémentation
-(\texttt{03\_power\_bi/measures\_dax.md}, bloc 5 : détention de
-produits, bloc 3 : regroupement des catégories de compte). Le tableau de
-correspondance mesure/visuel du même document sert de feuille de route
-pour cette finalisation.
+(\texttt{03\_\hspace{0pt}power\_\hspace{0pt}bi/\hspace{0pt}measures\_\hspace{0pt}dax.md},
+bloc 5 : détention de produits, bloc 3 : regroupement des catégories de
+compte). Le tableau de correspondance mesure/visuel du même document
+sert de feuille de route pour cette finalisation.
 
 \hypertarget{regroupement-des-catuxe9gories-de-compte}{%
 \subsection{5.4 Regroupement des catégories de
 compte}\label{regroupement-des-catuxe9gories-de-compte}}
 
 Un travail spécifique a été mené pour rendre exploitable la variable
-\texttt{ACCOUNT\_CATEGORY\_LABEL}, qui compte près de 150 modalités
-distinctes dans les données sources --- dont plus de la moitié sans
-libellé renseigné (« Non disponible ») et le reste réparti en de très
-nombreuses catégories très fines (ex. « CPTE SOUS DELAG.DE CHANGE »,
-quelques dizaines de comptes). Un tel niveau de détail rend toute
-visualisation illisible.
+\texttt{ACCOUNT\_\hspace{0pt}CATEGORY\_\hspace{0pt}LABEL}, qui compte
+près de 150 modalités distinctes dans les données sources --- dont plus
+de la moitié sans libellé renseigné (« Non disponible ») et le reste
+réparti en de très nombreuses catégories très fines (ex. « CPTE SOUS
+DELAG.DE CHANGE », quelques dizaines de comptes). Un tel niveau de
+détail rend toute visualisation illisible.
 
 Ces catégories ont été regroupées en 7 familles métier (colonne calculée
-\texttt{Famille\ Compte}, cf.~\texttt{03\_power\_bi/measures\_dax.md}),
+\texttt{Famille\ Compte},
+cf.~\texttt{03\_\hspace{0pt}power\_\hspace{0pt}bi/\hspace{0pt}measures\_\hspace{0pt}dax.md}),
 avec un résultat particulièrement parlant :
 
-\begin{longtable}[]{@{}lll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3453}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3292}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2654}}@{}}
 \toprule\noalign{}
-Famille & Part du portefeuille & Taux de churn \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Famille
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Part du portefeuille
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Taux de churn
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
@@ -763,11 +806,12 @@ Modélisation Machine Learning
 modélisation}\label{objectif-et-grain-de-la-moduxe9lisation}}
 
 L'objectif est de prédire, pour un client donné, sa probabilité de churn
-complet (\texttt{CLIENT\_FULL\_CHURN}, voir section 2.3). Contrairement
-aux analyses BI menées au grain compte-produit, la modélisation
-prédictive se place au \textbf{grain client} : chaque ligne du jeu de
-données d'entraînement représente un client, ses features résultant
-d'une agrégation SQL de l'ensemble de ses comptes et produits.
+complet (\texttt{CLIENT\_\hspace{0pt}FULL\_\hspace{0pt}CHURN}, voir
+section 2.3). Contrairement aux analyses BI menées au grain
+compte-produit, la modélisation prédictive se place au \textbf{grain
+client} : chaque ligne du jeu de données d'entraînement représente un
+client, ses features résultant d'une agrégation SQL de l'ensemble de ses
+comptes et produits.
 
 Ce choix de grain a une conséquence méthodologique importante,
 développée en 6.2 : plusieurs variables candidates, naturellement
@@ -785,11 +829,12 @@ identifiées}\label{pruxe9paration-des-donnuxe9es-et-fuites-de-donnuxe9es-identi
 données}\label{construction-du-jeu-de-donnuxe9es}}
 
 Le jeu de données d'entraînement est construit par une requête SQL
-unique (\texttt{04\_machine\_learning/src/prepare\_data.py}), qui agrège
-directement les données de l'entrepôt PostgreSQL par client
-(\texttt{GROUP\ BY\ CUSTOMER\_NO}), sans étape intermédiaire de fichier
-CSV caché. Cette requête produit \textbf{363 569 lignes} (une par
-client), avec des features couvrant :
+unique
+(\texttt{04\_\hspace{0pt}machine\_\hspace{0pt}learning/\hspace{0pt}src/\hspace{0pt}prepare\_\hspace{0pt}data.py}),
+qui agrège directement les données de l'entrepôt PostgreSQL par client
+(\texttt{GROUP\ BY\ CUSTOMER\_\hspace{0pt}NO}), sans étape intermédiaire
+de fichier CSV caché. Cette requête produit \textbf{363 569 lignes} (une
+par client), avec des features couvrant :
 
 \begin{itemize}
 \tightlist
@@ -815,32 +860,35 @@ Un travail de vigilance méthodologique a permis d'identifier deux fuites
 de données au cours du premier essai d'entraînement, documentées et
 corrigées plutôt que masquées :
 
-\textbf{Fuite directe --- \texttt{NB\_COMPTES\_CLOS}.} Cette variable a
+\textbf{Fuite directe ---
+\texttt{NB\_\hspace{0pt}COMPTES\_\hspace{0pt}CLOS}.} Cette variable a
 été initialement incluse comme feature candidate. Or
-\texttt{CLIENT\_FULL\_CHURN} est \emph{défini} comme
-\texttt{NB\_COMPTES\_CLOS\ =\ NB\_COMPTES} : la conserver revient à
-donner au modèle la réponse dans l'énoncé. Le premier essai
-d'entraînement avec cette variable a donné un score parfait sur toutes
-les métriques (précision, rappel, F1, AUC = 1,000), un signal sans
-ambiguïté de fuite de données. La variable a été retirée.
+\texttt{CLIENT\_\hspace{0pt}FULL\_\hspace{0pt}CHURN} est \emph{défini}
+comme
+\texttt{NB\_\hspace{0pt}COMPTES\_\hspace{0pt}CLOS\ =\ NB\_\hspace{0pt}COMPTES}
+: la conserver revient à donner au modèle la réponse dans l'énoncé. Le
+premier essai d'entraînement avec cette variable a donné un score
+parfait sur toutes les métriques (précision, rappel, F1, AUC = 1,000),
+un signal sans ambiguïté de fuite de données. La variable a été retirée.
 
-\textbf{Fuite indirecte --- \texttt{NB\_DEVISES}.} Le nombre de devises
-distinctes détenues par le client est apparu comme la variable la plus
-prédictive lors d'un deuxième essai, avec une importance
-disproportionnée (SHAP). Une investigation a montré que
-\texttt{NB\_DEVISES\ =\ 0} coïncidait avec \texttt{CHURN\ =\ 1} dans
-près de 100 \% des cas pour un sous-groupe de 139 000 clients (38 \% du
-jeu de données) --- non pas parce que l'absence de multi-devise cause le
-churn, mais parce que le champ \texttt{CURRENCY} n'est renseigné dans le
-système source que lorsque les données produit sont complètes, ce qui
-coïncide structurellement avec la clôture du compte plutôt que de
-refléter un comportement client réel. Un \textbf{test de sensibilité} a
-permis de trancher : un modèle XGBoost entraîné sans cette variable
-obtient un PR-AUC quasi identique (0,9828 contre 0,983 avec), la
-variable \texttt{A\_EPARGNE\_PLACEMENT} et \texttt{MONTANT\_TOTAL}
-prenant alors le relais dans l'importance des features --- un signal
-bien plus défendable d'un point de vue métier. La variable a été retirée
-définitivement.
+\textbf{Fuite indirecte --- \texttt{NB\_\hspace{0pt}DEVISES}.} Le nombre
+de devises distinctes détenues par le client est apparu comme la
+variable la plus prédictive lors d'un deuxième essai, avec une
+importance disproportionnée (SHAP). Une investigation a montré que
+\texttt{NB\_\hspace{0pt}DEVISES\ =\ 0} coïncidait avec
+\texttt{CHURN\ =\ 1} dans près de 100 \% des cas pour un sous-groupe de
+139 000 clients (38 \% du jeu de données) --- non pas parce que
+l'absence de multi-devise cause le churn, mais parce que le champ
+\texttt{CURRENCY} n'est renseigné dans le système source que lorsque les
+données produit sont complètes, ce qui coïncide structurellement avec la
+clôture du compte plutôt que de refléter un comportement client réel. Un
+\textbf{test de sensibilité} a permis de trancher : un modèle XGBoost
+entraîné sans cette variable obtient un PR-AUC quasi identique (0,9828
+contre 0,983 avec), la variable
+\texttt{A\_\hspace{0pt}EPARGNE\_\hspace{0pt}PLACEMENT} et
+\texttt{MONTANT\_\hspace{0pt}TOTAL} prenant alors le relais dans
+l'importance des features --- un signal bien plus défendable d'un point
+de vue métier. La variable a été retirée définitivement.
 
 Cette démarche --- détecter, investiguer par un test chiffré,
 documenter, corriger --- est jugée plus rigoureuse qu'un simple retrait
@@ -879,19 +927,19 @@ classes}\label{gestion-du-duxe9suxe9quilibre-de-classes}}
 
 Le taux de churn client (44,5 \%) constitue un déséquilibre modéré
 plutôt que sévère. Il a été traité par pondération des classes
-(\texttt{class\_weight="balanced"}) plutôt que par un rééchantillonnage
-synthétique (SMOTE), ce dernier n'apparaissant pas nécessaire compte
-tenu du déséquilibre limité et présentant un risque de créer des
-exemples synthétiques peu réalistes sur des variables catégorielles à
-haute cardinalité.
+(\texttt{class\_\hspace{0pt}weight="balanced"}) plutôt que par un
+rééchantillonnage synthétique (SMOTE), ce dernier n'apparaissant pas
+nécessaire compte tenu du déséquilibre limité et présentant un risque de
+créer des exemples synthétiques peu réalistes sur des variables
+catégorielles à haute cardinalité.
 
 \hypertarget{suxe9paration-train-test}{%
 \subsubsection{6.2.5 Séparation train /
 test}\label{suxe9paration-train-test}}
 
 Un découpage stratifié 80 \% / 20 \% a été retenu
-(\texttt{random\_state=42} pour la reproductibilité), soit environ 290
-855 clients pour l'entraînement et 72 714 pour l'évaluation.
+(\texttt{random\_\hspace{0pt}state=42} pour la reproductibilité), soit
+environ 290 855 clients pour l'entraînement et 72 714 pour l'évaluation.
 
 \hypertarget{moduxe8les-entrauxeenuxe9s-et-muxe9triques-duxe9valuation}{%
 \subsection{6.3 Modèles entraînés et métriques
@@ -920,14 +968,14 @@ qui est indiqué explicitement dans le tableau ci-dessous et doit être
 gardé à l'esprit dans l'interprétation de leurs résultats.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1683}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1135}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0879}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0802}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0949}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0879}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1683}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1390}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Modèle
@@ -1010,9 +1058,23 @@ détaillé}\label{rapport-de-classification-duxe9tailluxe9}}
 
 Sur le jeu de test (72 714 clients) :
 
-\begin{longtable}[]{@{}lllll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2602}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1939}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1502}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1734}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1622}}@{}}
 \toprule\noalign{}
-& Précision & Rappel & F1-score & Support \\
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Précision
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Rappel
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+F1-score
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Support
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
@@ -1051,23 +1113,25 @@ données de la section 6.2.2 corrigées, sont :
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{\texttt{MONTANT\_TOTAL}} --- montant cumulé des produits
-  détenus par le client. Un montant faible ou nul est associé au churn.
+  \textbf{\texttt{MONTANT\_\hspace{0pt}TOTAL}} --- montant cumulé des
+  produits détenus par le client. Un montant faible ou nul est associé
+  au churn.
 \item
-  \textbf{\texttt{ANCIENNETE\_COMPTE\_MOY\_ANNEES}} --- ancienneté
-  moyenne des comptes du client.
+  \textbf{\texttt{ANCIENNETE\_\hspace{0pt}COMPTE\_\hspace{0pt}MOY\_\hspace{0pt}ANNEES}}
+  --- ancienneté moyenne des comptes du client.
 \item
-  \textbf{\texttt{A\_EPARGNE\_PLACEMENT}} --- détention d'un produit
-  d'épargne ou de placement, qui ressort comme un facteur
-  \textbf{protecteur} contre le churn.
+  \textbf{\texttt{A\_\hspace{0pt}EPARGNE\_\hspace{0pt}PLACEMENT}} ---
+  détention d'un produit d'épargne ou de placement, qui ressort comme un
+  facteur \textbf{protecteur} contre le churn.
 \item
-  \textbf{\texttt{NB\_COMPTES}} --- nombre de comptes détenus
-  (multi-bancarisation).
+  \textbf{\texttt{NB\_\hspace{0pt}COMPTES}} --- nombre de comptes
+  détenus (multi-bancarisation).
 \item
-  \textbf{\texttt{ANCIENNETE\_COMPTE\_MAX\_ANNEES}},
-  \textbf{\texttt{ANCIENNETE\_CLIENT\_ANNEES}},
-  \textbf{\texttt{SOLDE\_MOYEN}}, \textbf{\texttt{SOLDE\_TOTAL}} ---
-  ancienneté et niveau de solde, dans l'ordre d'importance décroissante.
+  \textbf{\texttt{ANCIENNETE\_\hspace{0pt}COMPTE\_\hspace{0pt}MAX\_\hspace{0pt}ANNEES}},
+  \textbf{\texttt{ANCIENNETE\_\hspace{0pt}CLIENT\_\hspace{0pt}ANNEES}},
+  \textbf{\texttt{SOLDE\_\hspace{0pt}MOYEN}},
+  \textbf{\texttt{SOLDE\_\hspace{0pt}TOTAL}} --- ancienneté et niveau de
+  solde, dans l'ordre d'importance décroissante.
 \end{enumerate}
 
 \textbf{Convergence avec l'analyse descriptive.} Le facteur protecteur
@@ -1087,14 +1151,15 @@ modèle}\label{sauvegarde-et-intuxe9gration-du-moduxe8le}}
 
 Le modèle final, incluant l'intégralité du pipeline de prétraitement,
 est sérialisé avec \texttt{joblib}
-(\texttt{04\_machine\_learning/models/model\_final.joblib}, environ 1
-Mo). Ce choix garantit que l'inférence en production (application web,
-section 7) applique exactement les mêmes transformations qu'à
-l'entraînement, sans risque de divergence entre les deux environnements.
-Les versions de \texttt{scikit-learn} et \texttt{XGBoost} utilisées à
-l'entraînement sont épinglées dans les dépendances de l'application web,
-pour éviter toute incompatibilité de désérialisation du modèle liée à un
-changement de version. \# 7. Interface web et déploiement
+(\texttt{04\_\hspace{0pt}machine\_\hspace{0pt}learning/\hspace{0pt}models/\hspace{0pt}model\_\hspace{0pt}final.joblib},
+environ 1 Mo). Ce choix garantit que l'inférence en production
+(application web, section 7) applique exactement les mêmes
+transformations qu'à l'entraînement, sans risque de divergence entre les
+deux environnements. Les versions de \texttt{scikit-learn} et
+\texttt{XGBoost} utilisées à l'entraînement sont épinglées dans les
+dépendances de l'application web, pour éviter toute incompatibilité de
+désérialisation du modèle liée à un changement de version. \# 7.
+Interface web et déploiement
 
 \hypertarget{objectifs-et-puxe9rimuxe8tre-fonctionnel}{%
 \subsection{7.1 Objectifs et périmètre
@@ -1196,15 +1261,17 @@ décroissant, et exportable au format CSV pour une exploitation par les
 \subsection{7.6 Déploiement}\label{duxe9ploiement}}
 
 Une procédure de déploiement sur Streamlit Community Cloud a été
-documentée (\texttt{05\_web\_app/DEPLOY.md}), incluant le point
-d'attention le plus critique : contrairement à une exécution locale, un
-déploiement cloud ne peut pas atteindre un PostgreSQL hébergé sur la
-machine de développement --- la procédure détaille la mise en place d'un
-PostgreSQL public gratuit (Neon) et le rechargement des données via le
-pipeline ETL vers cette instance distante, ainsi que la gestion des
-secrets de connexion. À la date de rédaction de ce rapport,
-l'application est fonctionnelle en environnement local ; le déploiement
-public final est en cours de finalisation (voir section 8, limites).
+documentée
+(\texttt{05\_\hspace{0pt}web\_\hspace{0pt}app/\hspace{0pt}DEPLOY.md}),
+incluant le point d'attention le plus critique : contrairement à une
+exécution locale, un déploiement cloud ne peut pas atteindre un
+PostgreSQL hébergé sur la machine de développement --- la procédure
+détaille la mise en place d'un PostgreSQL public gratuit (Neon) et le
+rechargement des données via le pipeline ETL vers cette instance
+distante, ainsi que la gestion des secrets de connexion. À la date de
+rédaction de ce rapport, l'application est fonctionnelle en
+environnement local ; le déploiement public final est en cours de
+finalisation (voir section 8, limites).
 
 \newpage
 
@@ -1225,16 +1292,18 @@ glissante et un historique multi-période que le jeu de données à
 disposition, en coupe unique, ne permet pas de construire.
 
 \textbf{Valeurs manquantes structurelles sur l'ancienneté des comptes.}
-Les variables \texttt{ANCIENNETE\_COMPTE\_MOY\_ANNEES} et
-\texttt{ANCIENNETE\_COMPTE\_MAX\_ANNEES} sont manquantes pour environ 86
-\% des clients churnés contre 0 \% des clients actifs, du fait du
-filtrage des dates d'ouverture antérieures à 1900 (section 4.1.2). Il ne
-s'agit pas d'une fuite de données au sens strict (l'imputation par la
-médiane ne transmet pas d'indicateur de valeur manquante au modèle),
-mais ce déséquilibre de complétude entre les deux classes doit être
-gardé à l'esprit dans l'interprétation des résultats, et pourrait
-justifier un travail de fiabilisation des dates anciennes côté système
-source.
+Les variables
+\texttt{ANCIENNETE\_\hspace{0pt}COMPTE\_\hspace{0pt}MOY\_\hspace{0pt}ANNEES}
+et
+\texttt{ANCIENNETE\_\hspace{0pt}COMPTE\_\hspace{0pt}MAX\_\hspace{0pt}ANNEES}
+sont manquantes pour environ 86 \% des clients churnés contre 0 \% des
+clients actifs, du fait du filtrage des dates d'ouverture antérieures à
+1900 (section 4.1.2). Il ne s'agit pas d'une fuite de données au sens
+strict (l'imputation par la médiane ne transmet pas d'indicateur de
+valeur manquante au modèle), mais ce déséquilibre de complétude entre
+les deux classes doit être gardé à l'esprit dans l'interprétation des
+résultats, et pourrait justifier un travail de fiabilisation des dates
+anciennes côté système source.
 
 \textbf{Catégories de compte majoritairement non renseignées.} Comme
 détaillé en section 5.4, 54,9 \% des comptes n'ont pas de catégorie
@@ -1288,11 +1357,11 @@ d'amélioration}\label{perspectives-damuxe9lioration}}
   usage opérationnel de rétention proactive plus direct.
 \item
   \textbf{Enrichissement transactionnel} : le référentiel de
-  transactions mis à disposition (\texttt{dim\_TRANSACTION}) n'a pas été
-  exploité dans la version actuelle du pipeline ; l'intégration de
-  features comportementales transactionnelles (fréquence, régularité des
-  mouvements) constituerait une piste naturelle d'amélioration du
-  pouvoir prédictif du modèle.
+  transactions mis à disposition (\texttt{dim\_\hspace{0pt}TRANSACTION})
+  n'a pas été exploité dans la version actuelle du pipeline ;
+  l'intégration de features comportementales transactionnelles
+  (fréquence, régularité des mouvements) constituerait une piste
+  naturelle d'amélioration du pouvoir prédictif du modèle.
 \item
   \textbf{Suivi de la dérive du modèle} : en cas de mise en production
   réelle, mettre en place un suivi de la performance du modèle dans le
@@ -1352,8 +1421,8 @@ prédictif présentés dans ce rapport.
 \subsection{A. Glossaire}\label{a.-glossaire}}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4412}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4988}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Terme
@@ -1386,11 +1455,11 @@ schémas dimensionnels \\
 code}\label{b.-structure-du-duxe9puxf4t-de-code}}
 
 Le code source complet est disponible sur le dépôt GitHub du projet :
-\texttt{https://github.com/issraaguedri-a11y/PI-ISRAAEYADONIALOUJAINA}.
+\texttt{https:/\hspace{0pt}/\hspace{0pt}github.com/\hspace{0pt}issraaguedri-a11y/\hspace{0pt}PI-ISRAAEYADONIALOUJAINA}.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5024}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4376}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Dossier
@@ -1401,21 +1470,23 @@ Contenu
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\texttt{00\_documentation/} & Documents de cadrage fournis par
-l'encadrant \\
-\texttt{01\_etl/} & Pipeline d'extraction, nettoyage et transformation
-des données \\
-\texttt{02\_data\_warehouse/} & Schéma SQL, scripts de chargement,
-documentation des KPIs \\
-\texttt{03\_power\_bi/} & Guide de construction et mesures DAX du
-rapport Power BI \\
-\texttt{04\_machine\_learning/} & Notebooks et scripts d'entraînement,
-comparaison des modèles, modèle final \\
-\texttt{05\_web\_app/} & Application Streamlit et procédure de
-déploiement \\
-\texttt{06\_rapport/} & Le présent rapport (sources Markdown/LaTeX et
-version PDF) \\
-\texttt{07\_presentation/} & Slides de présentation \\
+\texttt{00\_\hspace{0pt}documentation/\hspace{0pt}} & Documents de
+cadrage fournis par l'encadrant \\
+\texttt{01\_\hspace{0pt}etl/\hspace{0pt}} & Pipeline d'extraction,
+nettoyage et transformation des données \\
+\texttt{02\_\hspace{0pt}data\_\hspace{0pt}warehouse/\hspace{0pt}} &
+Schéma SQL, scripts de chargement, documentation des KPIs \\
+\texttt{03\_\hspace{0pt}power\_\hspace{0pt}bi/\hspace{0pt}} & Guide de
+construction et mesures DAX du rapport Power BI \\
+\texttt{04\_\hspace{0pt}machine\_\hspace{0pt}learning/\hspace{0pt}} &
+Notebooks et scripts d'entraînement, comparaison des modèles, modèle
+final \\
+\texttt{05\_\hspace{0pt}web\_\hspace{0pt}app/\hspace{0pt}} & Application
+Streamlit et procédure de déploiement \\
+\texttt{06\_\hspace{0pt}rapport/\hspace{0pt}} & Le présent rapport
+(sources Markdown/LaTeX et version PDF) \\
+\texttt{07\_\hspace{0pt}presentation/\hspace{0pt}} & Slides de
+présentation \\
 \end{longtable}
 
 Chaque dossier dispose d'un \texttt{README.md} détaillant les étapes

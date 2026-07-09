@@ -11,11 +11,18 @@ section "Étape 7").
 ├── rapport_final.pdf         # le rapport final, prêt à soumettre
 ├── figures/                   # toutes les images utilisées (captures d'écran, diagrammes, graphiques)
 └── sources/
+    ├── metadata.yaml          # titre, auteurs, date (UTF-8 propre — voir note ci-dessous)
     ├── rapport_source.md      # source Markdown unique (assemblage des 5 parties)
     ├── part1_intro_donnees.md à part5_web_limites_conclusion.md  # sections sources, éditables séparément
     ├── template.tex           # template LaTeX (dérivé de 00_documentation/template.tex, avec support images ajouté)
+    ├── fit_tables.lua         # filtre Pandoc : empêche tableaux et chemins de fichiers longs de déborder de la page
     └── rapport_final.tex      # source LaTeX autonome, compilable indépendamment de Pandoc (ex. sur Overleaf)
 ```
+
+⚠️ **Ne pas passer le titre/auteurs via `-V title="..."` en ligne de commande** :
+les caractères accentués (é, è...) peuvent être corrompus selon l'encodage du
+shell utilisé. Toujours passer par `sources/metadata.yaml`, dont l'encodage
+UTF-8 est garanti.
 
 ## Contenu du rapport
 
@@ -43,13 +50,11 @@ cat sources/part1_intro_donnees.md sources/part2_architecture_etl.md \
     sources/part3_powerbi.md sources/part4_ml.md \
     sources/part5_web_limites_conclusion.md > sources/rapport_source.md
 
-pandoc sources/rapport_source.md \
+pandoc sources/metadata.yaml sources/rapport_source.md \
   --from markdown+smart \
   --template=sources/template.tex \
+  --lua-filter=sources/fit_tables.lua \
   --pdf-engine=xelatex \
-  -V title="Analyse et Prédiction du Churn Client" \
-  -V author="Israa Guedri, Eya Smeti, Donia Belamin, Loujaina Guesmi" \
-  -V date="Juillet 2026" \
   --toc --toc-depth=2 \
   -o rapport_final.pdf
 ```
